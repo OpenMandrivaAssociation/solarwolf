@@ -1,6 +1,6 @@
 %define	name	solarwolf
 %define	version	1.5
-%define	release	2mdk
+%define	release	%mkrel 2
 %define	Summary	2D frantic arcade game of collecting boxes and dodging bullets
 
 Name:		%{name}
