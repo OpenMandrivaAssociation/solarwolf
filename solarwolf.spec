@@ -43,7 +43,7 @@ cd %{_gamesdatadir}/%{name}
 ./%{name}.py $@
 EOF
 
-mkdir -p %{_datadir}/applications/
+mkdir -p %buildroot%{_datadir}/applications/
 cat << EOF > %buildroot%{_datadir}/applications/mandriva-$RPM_BUILD_ROOT.desktop
 [Desktop Entry]
 Encoding=UTF-8
