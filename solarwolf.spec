@@ -44,7 +44,7 @@ cd %{_gamesdatadir}/%{name}
 EOF
 
 mkdir -p %buildroot%{_datadir}/applications/
-cat << EOF > %buildroot%{_datadir}/applications/mandriva-$RPM_BUILD_ROOT.desktop
+cat << EOF > %buildroot%{_datadir}/applications/mandriva-%name.desktop
 [Desktop Entry]
 Encoding=UTF-8
 Type=Application
