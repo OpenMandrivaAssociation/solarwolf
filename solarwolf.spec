@@ -43,14 +43,16 @@ cd %{_gamesdatadir}/%{name}
 ./%{name}.py $@
 EOF
 
-%{__install} -d $RPM_BUILD_ROOT%{_menudir}
-%{__cat} <<EOF > $RPM_BUILD_ROOT%{_menudir}/%{name}
-?package(%{name}):command="%{_gamesbindir}/%{name}" \
-		icon=%{name}.png \
-		needs="x11" \
-		section="More Applications/Games/Arcade" \
-		title="SolarWolf"\
-		longtitle="%{Summary}"
+mkdir -p %{_datadir}/applications/
+cat << EOF > %buildroot%{_datadir}/applications/mandriva-$RPM_BUILD_ROOT.desktop
+[Desktop Entry]
+Encoding=UTF-8
+Type=Application
+Exec=%{_gamesbindir}/%{name}		
+Icon=%{name}.png		
+Categories=Game;ArcadeGame;		
+Name=SolarWolf		
+Comment=%{Summary}
 EOF
 
 %{__install} %{SOURCE11} -D $RPM_BUILD_ROOT%{_miconsdir}/%{name}.png
@@ -75,7 +77,7 @@ EOF
 %{_iconsdir}/%{name}.png
 %{_liconsdir}/%{name}.png
 %{_miconsdir}/%{name}.png
-%{_menudir}/%{name}
+%{_datadir}/applications/mandriva-%{name}.desktop
 %defattr(755,root,root,755)
 %{_gamesbindir}/%{name}
 %{_gamesdatadir}/%{name}/%{name}.py
