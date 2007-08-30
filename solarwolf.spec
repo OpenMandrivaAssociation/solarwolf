@@ -49,7 +49,7 @@ cat << EOF > %buildroot%{_datadir}/applications/mandriva-%name.desktop
 Type=Application
 Exec=%{_gamesbindir}/%{name}		
 Icon=%{name}.png		
-Categories=Game;ArcadeGame;		
+Categories=Game;ArcadeGame;		;
 Name=SolarWolf		
 Comment=%{Summary}
 EOF
