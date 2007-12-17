@@ -16,7 +16,6 @@ Group:		Games/Arcade
 Summary:	%{Summary}
 BuildArch:	noarch
 Requires:	pygame
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
 SolarWolf is an action/arcade game written entirely in Python.
