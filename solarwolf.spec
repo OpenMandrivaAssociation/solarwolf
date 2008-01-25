@@ -1,6 +1,6 @@
 %define	name	solarwolf
 %define	version	1.5
-%define	release	%mkrel 3
+%define	release	%mkrel 4
 %define	Summary	2D frantic arcade game of collecting boxes and dodging bullets
 
 Name:		%{name}
@@ -47,10 +47,10 @@ mkdir -p %buildroot%{_datadir}/applications/
 cat << EOF > %buildroot%{_datadir}/applications/mandriva-%name.desktop
 [Desktop Entry]
 Type=Application
-Exec=%{_gamesbindir}/%{name}		
-Icon=%{name}.png		
-Categories=Game;ArcadeGame;		;
-Name=SolarWolf		
+Exec=%{_gamesbindir}/%{name}
+Icon=%{name}
+Categories=Game;ArcadeGame;
+Name=SolarWolf
 Comment=%{Summary}
 EOF
 
