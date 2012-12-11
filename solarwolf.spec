@@ -1,6 +1,6 @@
 %define	name	solarwolf
 %define	version	1.5
-%define	release	%mkrel 9
+%define	release	10
 %define	Summary	2D frantic arcade game of collecting boxes and dodging bullets
 
 Name:		%{name}
@@ -16,7 +16,6 @@ Group:		Games/Arcade
 Summary:	%{Summary}
 BuildArch:	noarch
 Requires:	pygame
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
 SolarWolf is an action/arcade game written entirely in Python.
@@ -32,19 +31,17 @@ rm -rf `find -type d -name .xvpics`
 %build
 
 %install
-%{__rm} -rf $RPM_BUILD_ROOT
+%{__install} -d %{buildroot}{%{_gamesdatadir}/%{name},%{_gamesbindir}}
+cp -pr data code %{name}.py %{buildroot}%{_gamesdatadir}/%{name}/
 
-%{__install} -d $RPM_BUILD_ROOT{%{_gamesdatadir}/%{name},%{_gamesbindir}}
-%{__cp} -a data code %{name}.py $RPM_BUILD_ROOT%{_gamesdatadir}/%{name}/
-
-%{__cat} <<EOF > $RPM_BUILD_ROOT%{_gamesbindir}/%{name}
+%{__cat} <<EOF > %{buildroot}%{_gamesbindir}/%{name}
 #!/bin/sh
 cd %{_gamesdatadir}/%{name}
 ./%{name}.py $@
 EOF
 
-mkdir -p %buildroot%{_datadir}/applications/
-cat << EOF > %buildroot%{_datadir}/applications/mandriva-%name.desktop
+mkdir -p %{buildroot}%{_datadir}/applications/
+cat << EOF > %{buildroot}%{_datadir}/applications/mandriva-%name.desktop
 [Desktop Entry]
 Type=Application
 Exec=%{_gamesbindir}/%{name}
@@ -54,22 +51,10 @@ Name=SolarWolf
 Comment=%{Summary}
 EOF
 
-%{__install} %{SOURCE11} -D $RPM_BUILD_ROOT%{_miconsdir}/%{name}.png
-%{__install} %{SOURCE12} -D $RPM_BUILD_ROOT%{_iconsdir}/%{name}.png
-%{__install} %{SOURCE13} -D $RPM_BUILD_ROOT%{_liconsdir}/%{name}.png
+%{__install} %{SOURCE11} -D %{buildroot}%{_miconsdir}/%{name}.png
+%{__install} %{SOURCE12} -D %{buildroot}%{_iconsdir}/%{name}.png
+%{__install} %{SOURCE13} -D %{buildroot}%{_liconsdir}/%{name}.png
 
-%if %mdkversion < 200900
-%post
-%update_menus
-%endif
-
-%if %mdkversion < 200900
-%postun
-%clean_menus
-%endif
-
-%clean
-%{__rm} -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
@@ -84,3 +69,61 @@ EOF
 %defattr(755,root,root,755)
 %{_gamesbindir}/%{name}
 %{_gamesdatadir}/%{name}/%{name}.py
+
+
+%changelog
+* Tue May 03 2011 Michael Scherer <misc@mandriva.org> 1.5-9mdv2011.0
++ Revision: 664871
+- mass rebuild
+
+* Tue Sep 08 2009 Thierry Vignaud <tv@mandriva.org> 1.5-8mdv2010.0
++ Revision: 433987
+- rebuild
+
+* Sat Aug 02 2008 Thierry Vignaud <tv@mandriva.org> 1.5-7mdv2009.0
++ Revision: 260877
+- rebuild
+
+* Tue Jul 29 2008 Thierry Vignaud <tv@mandriva.org> 1.5-6mdv2009.0
++ Revision: 252728
+- rebuild
+
+  + Pixel <pixel@mandriva.com>
+    - rpm filetriggers deprecates update_menus/update_scrollkeeper/update_mime_database/update_icon_cache/update_desktop_database/post_install_gconf_schemas
+
+* Fri Jan 25 2008 Funda Wang <fwang@mandriva.org> 1.5-4mdv2008.1
++ Revision: 157784
+- fix desktop entry
+
+  + Olivier Blin <oblin@mandriva.com>
+    - restore BuildRoot
+
+  + Thierry Vignaud <tv@mandriva.org>
+    - kill re-definition of %%buildroot on Pixel's request
+    - kill desktop-file-validate's error: string list key "Categories" in group "Desktop Entry" does not have a semicolon (";") as trailing character
+    - kill desktop-file-validate's 'warning: key "Encoding" in group "Desktop Entry" is deprecated'
+
+* Tue Aug 28 2007 Thierry Vignaud <tv@mandriva.org> 1.5-3mdv2008.0
++ Revision: 72276
+- convert menu to XDG
+- use %%mkrel
+
+  + Per Øyvind Karlsen <peroyvind@mandriva.org>
+    - Import solarwolf
+
+
+
+* Fri Aug 27 2004 Per Øyvind Karlsen <peroyvind@linux-mandrake.com> 1.5-2mdk
+- rebuild for new menu
+
+* Wed Feb 18 2004 Per Øyvind Karlsen <peroyvind@linux-mandrake.com> 1.5-1mdk
+- 1.5
+
+* Wed Jan 14 2004 Per Øyvind Karlsen <peroyvind@linux-mandrake.com> 1.4-1mdk
+- 1.4
+
+* Sat Sep 27 2003 Per Øyvind Karlsen <peroyvind@linux-mandrake.com> 1.3-1mdk
+- 1.3
+
+* Mon Aug 04 2003 Per Øyvind Karlsen <peroyvind@linux-mandrake.com> 1.2-1mdk
+- initial mdk release
