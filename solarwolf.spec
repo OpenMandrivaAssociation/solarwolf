@@ -1,6 +1,6 @@
 %define	name	solarwolf
 %define	version	1.5
-%define	release	10
+%define release	11
 %define	Summary	2D frantic arcade game of collecting boxes and dodging bullets
 
 Name:		%{name}
