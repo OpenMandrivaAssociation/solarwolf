@@ -6,7 +6,7 @@
 Name:		%{name}
 Version:	%{version}
 Release:	%{release}
-URL:		http://www.pygame.org/shredwheat/solarwolf/
+URL:		https://www.pygame.org/shredwheat/solarwolf/
 Source0:	%{name}-%{version}.tar.bz2
 Source11:	%{name}-16x16.png
 Source12:	%{name}-32x32.png
